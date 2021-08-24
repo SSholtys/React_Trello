@@ -3,15 +3,20 @@ import List from "./List";
 import { connect } from "react-redux"
 import Header from "./Header";
 import AddBtn from "./AddBtn";
+import { DragDropContext } from "react-beautiful-dnd"
+
 
 
 
 
 class App extends Component {
+  onDragEnd = () => {}
+
   render() {
 
     const { lists } = this.props;
     return (
+      <DragDropContext onDragEnd={this.onDragEnd}>
       <div className="App">
         <div style={styles.mainContainer}>
           <Header/>
@@ -26,7 +31,8 @@ class App extends Component {
             <AddBtn list/>
           </div>
         </div>
-    </div>
+      </div>
+      </DragDropContext>
     );
   }
 }

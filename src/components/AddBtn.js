@@ -4,8 +4,7 @@ import { Button, Card } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import { connect } from 'react-redux';
-import { addCard } from '../actions/cardsActions';
-import { addList} from '../actions/listsActions'
+import {addCard, addList} from '../actions'
 
 class AddBtn extends React.Component {
   state = {
@@ -57,7 +56,6 @@ class AddBtn extends React.Component {
 
     const buttonTextOpacity = list ? 1 : 0.5
     const buttonTextColor = list ? "white" : "inherit"
-    const buttonTextBackground = list ? "rgba(0,0,0,.15)" : "inherit"
 
     return (
       <div
@@ -65,10 +63,9 @@ class AddBtn extends React.Component {
           ...styles.openFormButtonGroup,
           opacity: buttonTextOpacity,
           color: buttonTextColor,
-          backgroundColor: buttonTextBackground
         }}
         onClick={this.openForm}>
-        <Fab size="small" color="#AAAAAA" aria-label="add" >
+        <Fab size="small" color="inherit" aria-label="add" >
           <AddIcon />
         </Fab>
       
@@ -131,7 +128,8 @@ const styles = {
     cursor: "pointer",
     borderRadius: 3,
     height: 36,
-    paddingLeft: 10
+    paddingLeft: 10,
+    backgroundColor: 'transparent'
   }
 }
 

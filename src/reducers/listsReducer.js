@@ -1,38 +1,38 @@
 import { CONSTANTS } from '../actions'
 
 let listID = 2;
-let cardID = 3;
+let cardID = 4;
 
 let initialState = [
   {
-    title: 'First Episode',
-    id: 0,
+    title: 'First List',
+    id: `list-${0}`,
     cards: [
       {
-        id: 0,
-        text: 'we created a static list and static card',
+        id: `card-${0}`,
+        text: 'one card...',
       },
       {
-        id: 1,
-        text: ' we used a mix between material UI React and styled components'
+        id: `card-${1}`,
+        text: 'another card'
       }
     ]
   },
   {
-    title: 'This Episode',
-    id: 1,
+    title: 'Second List',
+    id: `list-${1}`,
     cards: [
       {
-        id: 0,
-        text: 'we will create our first reducer'
+        id: `card-${2}`,
+        text: 'smth to do...'
       },
       {
-        id: 1,
-        text: 'and render many cards on our list with static data'
+        id: `card-${3}`,
+        text: 'smth in process'
       },
       {
-        id: 2,
-        text: 'we will also make some little changes I forgot in the last episode'
+        id: `card-${3}`,
+        text: 'smth I have to do soon'
       }
     ]
   }
@@ -43,17 +43,17 @@ const listsReducer = (state = initialState, action) => {
   switch (action.type) {
     case CONSTANTS.ADD_LIST:
       const newList = {
-        text: action.payload,
+        title: action.payload,
         cards: [],
-        id: listID
+        id: `list-${listID}`
       }
       listID += 1
       return [...state, newList];
     
     case CONSTANTS.ADD_CARD:
       const newCard = {
-        text: action.payload,
-        id: cardID
+        text: action.payload.text,
+        id: `card-${cardID}`
       }
       cardID += 1;
 
