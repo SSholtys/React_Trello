@@ -4,13 +4,26 @@ import { connect } from "react-redux"
 import Header from "./Header";
 import AddBtn from "./AddBtn";
 import { DragDropContext } from "react-beautiful-dnd"
-
-
-
-
+import {sort} from "../actions"
 
 class App extends Component {
-  onDragEnd = () => {}
+  onDragEnd = (result) => {
+    const { destination, source, draggableId } = result
+    
+    if (!destination) {
+      return
+    }
+
+    this.props.dispatch(
+      sort(
+        source.droppableId,
+        destination.droppableId,
+        source.index,
+        destination.index,
+        draggableId
+      )
+    )
+  }
 
   render() {
 
@@ -20,7 +33,7 @@ class App extends Component {
       <div className="App">
         <div style={styles.mainContainer}>
           <Header/>
-          <h1 style={styles.title}>SEU QUADRO</h1>
+          <h1 style={styles.title}>React Trello</h1>
           <div style={styles.listContainer}>
           {lists.map(list => (
             <List

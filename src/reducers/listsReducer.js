@@ -1,7 +1,7 @@
 import { CONSTANTS } from '../actions'
 
 let listID = 2;
-let cardID = 4;
+let cardID = 7;
 
 let initialState = [
   {
@@ -31,8 +31,22 @@ let initialState = [
         text: 'smth in process'
       },
       {
-        id: `card-${3}`,
+        id: `card-${4}`,
         text: 'smth I have to do soon'
+      }
+    ]
+  },
+  {
+    title: 'Third List',
+    id: `list-${2}`,
+    cards: [
+      {
+        id: `card-${5}`,
+        text: 'smth to do...'
+      },
+      {
+        id: `card-${6}`,
+        text: 'smth in process'
       }
     ]
   }
@@ -50,7 +64,7 @@ const listsReducer = (state = initialState, action) => {
       listID += 1
       return [...state, newList];
     
-    case CONSTANTS.ADD_CARD:
+    case CONSTANTS.ADD_CARD: {
       const newCard = {
         text: action.payload.text,
         id: `card-${cardID}`
@@ -67,6 +81,34 @@ const listsReducer = (state = initialState, action) => {
           return list
         }
       })
+
+      return newState
+      }
+    case CONSTANTS.DRAG_HAPPENED:
+      
+      const {
+        droppableIdStart,
+        droppableIdEnd,
+        droppableIndexStart,
+        droppableIndexEnd,
+        draggableId
+      } = action.payload
+      const newState = [...state]
+      if (droppableIdStart === droppableIdEnd) {
+        const list = state.find(list => droppableIdStart === list.id)
+        const card = list.cards.splice(droppableIndexStart, 1)
+        list.cards.splice(droppableIndexEnd, 0, ...card)
+      }
+
+      if (droppableIdStart !== droppableIdEnd) {
+        const listStart = state.find(list => droppableIdStart === list.id)
+
+        const card = listStart.cards.splice(droppableIndexStart, 1)
+
+        const listEnd = state.find(list => droppableIdEnd === list.id)
+
+        listEnd.cards.splice(droppableIndexEnd, 0, ...card)
+      }
 
       return newState
 

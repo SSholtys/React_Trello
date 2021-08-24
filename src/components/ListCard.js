@@ -6,6 +6,28 @@ import DelButton from './DelButton';
 import { Draggable } from 'react-beautiful-dnd';
 
 const ListCard = ({ text, id, index }) => {
+function displayTime() {
+    let str = "";
+
+    let currentTime = new Date()
+    let hours = currentTime.getHours()
+    let minutes = currentTime.getMinutes()
+    let seconds = currentTime.getSeconds()
+
+    if (minutes < 10) {
+        minutes = "0" + minutes
+    }
+    if (seconds < 10) {
+        seconds = "0" + seconds
+    }
+    str += hours + ":" + minutes + ":" + seconds + " ";
+    if(hours > 11){
+        str += "PM"
+    } else {
+        str += "AM"
+    }
+    return str;
+}
 
   return (
     <Draggable draggableId={String(id)} index={index}>
@@ -16,11 +38,11 @@ const ListCard = ({ text, id, index }) => {
           draggable={true}
     >
           <CardContent>
-            <Typography gutterBottom>
-             {text}
+              <Typography gutterBottom style={{display:'flex', justifyContent:'space-between', width:'100%'}}>
+             {text} <blockquote><small>edited at - {displayTime()}</small></blockquote>
             </Typography>
           </CardContent>
-          <DelButton/>
+          {/* <DelButton/> */}
         </Card>
         </div>  
       )}
