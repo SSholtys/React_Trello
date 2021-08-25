@@ -2,7 +2,7 @@ import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import DelButton from './DelButton';
+// import DelButton from './DelButton';
 import { Draggable } from 'react-beautiful-dnd';
 
 const ListCard = ({ text, id, index }) => {

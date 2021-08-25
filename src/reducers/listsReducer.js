@@ -1,7 +1,7 @@
 import { CONSTANTS } from '../actions'
 
 let listID = 2;
-let cardID = 7;
+let cardID = 5;
 
 let initialState = [
   {
@@ -33,20 +33,6 @@ let initialState = [
       {
         id: `card-${4}`,
         text: 'smth I have to do soon'
-      }
-    ]
-  },
-  {
-    title: 'Third List',
-    id: `list-${2}`,
-    cards: [
-      {
-        id: `card-${5}`,
-        text: 'smth to do...'
-      },
-      {
-        id: `card-${6}`,
-        text: 'smth in process'
       }
     ]
   }
